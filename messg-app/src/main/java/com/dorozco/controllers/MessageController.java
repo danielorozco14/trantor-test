@@ -47,13 +47,10 @@ public class MessageController {
     }
     /**
      * Returns all unread messages from the authenticated user     *
-     *  findByStatus == "not-read" returns all unread  messages.
+     *  
      * */
     @GetMapping("/read")
-    public List<Message> incomingMessages(Authentication authentication) {
-        /*List<Message> result;
-        result = messageRepository.findByStatus("not-read");
-        return result;*/
+    public List<Message> incomingMessages(Authentication authentication) {        
 
         List<Message> incomMessages = messageRepository.findByStatus("not-read").stream().filter(message ->
                         !message.getSender().equals(authentication.getName())).collect(Collectors.toList());
